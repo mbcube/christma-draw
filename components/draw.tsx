@@ -27,7 +27,7 @@ export default function Draw({ count }: { count: number }) {
 
     setCurrentDraw(draw);
     setTimeout(() => {
-      setPastDraw([...pastDraw, ...draw].sort((a, b) => a - b));
+      setPastDraw([...pastDraw, ...draw]);
     }, 2500);
   }
 
