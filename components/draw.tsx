@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 export default function Draw({ count }: { count: number }) {
   const [currentDraw, setCurrentDraw] = useState<number[]>([]);
   const [pastDraw, setPastDraw] = useState<number[]>([]);
+  const [drawing, setDrawing] = useState(false);
 
   useEffect(() => {
     drawNextFive();
   }, []);
 
   function drawNextFive() {
+    setDrawing(true);
     if (pastDraw.length >= count) return;
 
     const draw: number[] = [];
@@ -28,6 +30,7 @@ export default function Draw({ count }: { count: number }) {
     setCurrentDraw(draw);
     setTimeout(() => {
       setPastDraw([...pastDraw, ...draw]);
+      setDrawing(false);
     }, 2500);
   }
 
@@ -59,6 +62,7 @@ export default function Draw({ count }: { count: number }) {
               drawNextFive();
             }}
             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
+            disabled={drawing}
           >
             <ForwardIcon className="h-6 w-6 text-white" />
           </button>
